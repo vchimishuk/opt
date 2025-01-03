@@ -124,29 +124,29 @@ func TestLongArgument(t *testing.T) {
 	assertArgs(t, nil, args)
 }
 
-func TestBool(t *testing.T) {
-	testArgs := []string{"-ab", "-c"}
+func TestHas(t *testing.T) {
+	testArgs := []string{"-a", "-b", "10", "-c", "foo"}
 	descs := []*Desc{
 		{"a", "", ArgNone, "", ""},
-		{"b", "", ArgNone, "", ""},
-		{"c", "", ArgNone, "", ""},
+		{"b", "", ArgInt, "", ""},
+		{"c", "", ArgString, "", ""},
+		{"d", "", ArgString, "", ""},
 	}
-
 	opts, _, err := Parse(testArgs, descs)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if !opts.Bool("a") {
+	if opts.Has("a") == false {
 		t.Fatal()
 	}
-	if !opts.Bool("b") {
+	if opts.Has("b") == false {
 		t.Fatal()
 	}
-	if !opts.Bool("c") {
+	if opts.Has("c") == false {
 		t.Fatal()
 	}
-	if opts.Bool("d") {
+	if opts.Has("d") == true {
 		t.Fatal()
 	}
 }
@@ -294,7 +294,7 @@ exp:
 			}
 		}
 
-		t.Fatalf("%s option expected but %s found", e, a)
+		t.Fatalf("%v option expected but %v found", e, a)
 	}
 }
 

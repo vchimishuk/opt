@@ -54,17 +54,22 @@ if err != nil {
 
 Use options and arguments.
 ```go
-if opts.Bool("help") {
+if opts.Has("help") {
 	fmt.Println("Options:")
 	fmt.Print(opt.Usage(descs))
 }
 
-path := opts.StringOr("path", "")
+path := "default"
+if opts.Has("path") {
+	path = opts.String("path")
+}
+// Alternative way is to use the next line.
+// path := opts.StringOr("path", "default")
 
-if opts.Bool("add") {
+if opts.Has("add") {
 	fmt.Printf("Adding new item into '%s'...\n", path)
 }
-if opts.Bool("delete") {
+if opts.Has("delete") {
 	fmt.Printf("Deleting new item from '%s'...\n", path)
 }
 

@@ -51,17 +51,17 @@
 // 	}
 //
 // 3. Use options and arguments.
-// 	if opts.Bool("help") {
+// 	if opts.Has("help") {
 // 		fmt.Println("Options:")
 // 		fmt.Print(opt.Usage(descs))
 // 	}
 //
 // 	path := opts.StringOr("path", "")
 //
-// 	if opts.Bool("add") {
+// 	if opts.Has("add") {
 // 		fmt.Printf("Adding new item into '%s'...\n", path)
 // 	}
-// 	if opts.Bool("delete") {
+// 	if opts.Has("delete") {
 // 		fmt.Printf("Deleting new item from '%s'...\n", path)
 // 	}
 //
@@ -132,8 +132,8 @@ type Option struct {
 // Options is a list of all parsed options.
 type Options []*Option
 
-// Bool returns true if option named `name` was passed with args.
-func (o Options) Bool(name string) bool {
+// Has returns true if option named `name` was passed with args.
+func (o Options) Has(name string) bool {
 	return o.option(name) != nil
 }
 
